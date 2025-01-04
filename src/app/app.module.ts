@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
@@ -15,8 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { GameDescriptionComponent } from './game-description/game-description.component';
 import { MatCardModule } from '@angular/material/card';
-
-
 
 @NgModule({
   declarations: [
@@ -39,6 +36,6 @@ import { MatCardModule } from '@angular/material/card';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // AppComponent
 })
 export class AppModule { }

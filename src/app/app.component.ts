@@ -1,11 +1,51 @@
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 
+
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   styleUrls: ['./app.component.scss']
+// })
+// export class AppComponent {
+//   title = 'ringoffire';
+// }
+
+// import { Component, inject } from '@angular/core';
+// import { AsyncPipe } from '@angular/common';
+// import { Firestore } from '@angular/fire/firestore';
+
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: 'app.component.html',
+//   styleUrls: ['app.component.css'],
+//   imports: [AsyncPipe],
+// })
+// export class AppComponent {
+//   firestore: Firestore = inject(Firestore);
+
+//   constructor() {
+
+//   }
+// }
+
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  standalone: true,
+  imports: [AsyncPipe],
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css']
 })
 export class AppComponent {
-  title = 'ringoffire';
+  firestore: Firestore = inject(Firestore);
+  items$: Observable<any[]>;
+
+  constructor() {
+    const aCollection = collection(this.firestore, 'items')
+    this.items$ = collectionData(aCollection);
+  }
 }

@@ -14,6 +14,20 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { GameDescriptionComponent } from './game-description/game-description.component';
 import { MatCardModule } from '@angular/material/card';
+// import { initializeApp } from "firebase/app";
+
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyANZAayOuhwFPhubBODHRWttxma0qPdYGM",
+//   authDomain: "ring-of-fire-8a257.firebaseapp.com",
+//   projectId: "ring-of-fire-8a257",
+//   storageBucket: "ring-of-fire-8a257.firebasestorage.app",
+//   messagingSenderId: "663002228432",
+//   appId: "1:663002228432:web:e85f1fad79a513ca0a20d5"
+// };
+
+// const app = initializeApp(firebaseConfig);
+
 
 @NgModule({
   declarations: [

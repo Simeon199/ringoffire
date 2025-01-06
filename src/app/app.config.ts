@@ -10,11 +10,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom(
+      provideFirebaseApp(() => initializeApp({
+        apiKey: "AIzaSyBbo6dNUJx73zgWTiNq-AB0SvrtSwcOlKY",
+        authDomain: "ring-of-fire-7d5f5.firebaseapp.com",
+        projectId: "ring-of-fire-7d5f5",
+        storageBucket: "ring-of-fire-7d5f5.firebasestorage.app",
+        messagingSenderId: "273221802702",
+        appId: "1:273221802702:web:044e6d9c34e5533531ce9f"
+      })),
+      provideFirestore(() => getFirestore()),
       BrowserModule,
       FormsModule,
       BrowserAnimationsModule,

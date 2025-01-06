@@ -6,10 +6,12 @@ describe('DialogAddPlayerComponent', () => {
   let component: DialogAddPlayerComponent;
   let fixture: ComponentFixture<DialogAddPlayerComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [DialogAddPlayerComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [DialogAddPlayerComponent]
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(DialogAddPlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,3 +1,15 @@
+// import { Component } from '@angular/core';
+
+// @Component({
+//   selector: 'app-startscreen',
+//   standalone: true,
+//   imports: [],
+//   templateUrl: './startscreen.component.html',
+//   styleUrl: './startscreen.component.scss'
+// })
+// export class StartscreenComponent {
+
+// }
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -17,4 +29,3 @@ export class StartscreenComponent implements OnInit {
   }
 
 }
-

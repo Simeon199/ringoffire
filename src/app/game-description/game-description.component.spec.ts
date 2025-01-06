@@ -6,10 +6,12 @@ describe('GameDescriptionComponent', () => {
   let component: GameDescriptionComponent;
   let fixture: ComponentFixture<GameDescriptionComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [GameDescriptionComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [GameDescriptionComponent]
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(GameDescriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

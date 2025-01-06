@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogContent } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
   selector: 'app-dialog-add-player',
+  standalone: true,
+  imports: [MatDialogContent, MatFormFieldModule, MatDialogModule, FormsModule],
   templateUrl: './dialog-add-player.component.html',
   styleUrls: ['./dialog-add-player.component.scss']
 })
@@ -17,5 +23,4 @@ export class DialogAddPlayerComponent implements OnInit {
   onNoClick() {
     this.dialogRef.close();
   }
-
 }

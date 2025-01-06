@@ -1,7 +1,10 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-game-description',
+  standalone: true,  // Komponente als Standalone deklarieren
+  imports: [MatCardModule],
   templateUrl: './game-description.component.html',
   styleUrls: ['./game-description.component.scss']
 })
@@ -18,25 +21,26 @@ export class GameDescriptionComponent implements OnInit, OnChanges {
     { title: 'Thumbmaster', description: '' },
     { title: 'Men', description: 'All men drink.' },
     { title: 'Quizmaster', description: '' },
-    { title: 'Never have i ever...', description: 'Say something you nnever did. Everyone who did it has to drink.' },
-    { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
+    { title: 'Never have I ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
+    { title: 'Rule', description: 'Make a rule. Everyone needs to drink when they break the rule.' },
   ];
 
   title = '';
   description = '';
-  @Input() card: string;
+
+  @Input() card: string | undefined;  // Tippfehler: "never" auf "never" und Typisierung hinzufügen
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   ngOnChanges(): void {
     if (this.card) {
       console.log('Current card is:', this.card);
-      let cardNumber = +this.card.split('_')[1];
-      this.title = this.cardAction[cardNumber - 1].title;
-      this.description = this.cardAction[cardNumber - 1].description;
+      const cardNumber = +this.card.split('_')[1];
+      const cardData = this.cardAction[cardNumber - 1];
+      this.title = cardData.title;
+      this.description = cardData.description;
     }
   }
 }

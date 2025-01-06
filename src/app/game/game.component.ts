@@ -1,16 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/models/game';
+import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { Game } from '../../../src/models/game';
+import { GameDescriptionComponent } from '../game-description/game-description.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PlayerComponent } from '../player/player.component';
 
 @Component({
   selector: 'app-game',
+  standalone: true,
+  imports: [MatDialogModule,
+    CommonModule,
+    MatIconModule,
+    GameDescriptionComponent,
+    PlayerComponent
+  ],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
+
 export class GameComponent implements OnInit {
   pickCardAnimation = false;
-  currentCard: string = '';
+  currentCard: any = '';
   game!: Game;
 
   constructor(public dialog: MatDialog) {

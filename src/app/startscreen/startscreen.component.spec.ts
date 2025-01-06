@@ -6,10 +6,12 @@ describe('StartscreenComponent', () => {
   let component: StartscreenComponent;
   let fixture: ComponentFixture<StartscreenComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [StartscreenComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [StartscreenComponent]
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(StartscreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

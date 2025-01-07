@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { AppComponent } from '../app.component';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,11 +8,13 @@ import { Game } from '../../../src/models/game';
 import { GameDescriptionComponent } from '../game-description/game-description.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PlayerComponent } from '../player/player.component';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [MatDialogModule,
+  imports: [
+    MatDialogModule,
     CommonModule,
     MatIconModule,
     GameDescriptionComponent,
@@ -26,17 +29,20 @@ export class GameComponent implements OnInit {
   currentCard: any = '';
   game!: Game;
 
-  constructor(public dialog: MatDialog) {
-
+  constructor(public dialog: MatDialog, private firestoreService: FirestoreService) {
   }
 
   ngOnInit(): void {
     this.newGame();
+    this.firestoreService.getGames().subscribe(games => {
+      console.log("Aktuelle Spiele: ", games);
+    });
   }
 
   newGame() {
     this.game = new Game();
-    console.log(this.game);
+    this.firestoreService.addGame(this.game.toJson()); // this.game
+    // console.log(this.game);
   }
 
   takeCard() {

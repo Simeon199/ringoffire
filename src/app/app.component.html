@@ -1,6 +1,6 @@
 <ul>
-    @for (item of items$ | async; track item) {
-    <li>{{ item.title }}</li>
+    @for (game of games$ | async; track game) {
+    <li>{{ game.title }}</li>
     }
 </ul>
 <router-outlet></router-outlet>

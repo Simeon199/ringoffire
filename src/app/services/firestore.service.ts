@@ -9,16 +9,26 @@ import { GameData } from '../../models/game';
 })
 export class FirestoreService {
     constructor(private firestore: Firestore) { }
+    games: any;
 
     getGames(): Observable<any[]> {
-        const gamesCollection = collection(this.firestore, 'games');
-        return collectionData(gamesCollection);
+        let gamesCollection = this.getGamesRef();
+        return collectionData(gamesCollection, { idField: 'id' });
+        // return collectionData(gamesCollection);
     }
 
-    getGameById(gameId: string): Observable<any> {
-        const gameDocRef = doc(this.firestore, `game/${gameId}`);
-        return docData(gameDocRef);
+    invokeFirestore(arg: any) {
+        arg = this.firestore;
     }
+
+    getGamesRef() {
+        return collection(this.firestore, 'games');
+    }
+
+    // getGameById(gameId: string): Observable<any> {
+    //     const gameDocRef = doc(this.firestore, `game/${gameId}`);
+    //     return docData(gameDocRef);
+    // }
 
     async addGame(newGame: GameData) {
         const gamesCollection = collection(this.firestore, 'games');

@@ -2,14 +2,15 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+// import { AsyncPipe } from '@angular/common';
 import { FirestoreService } from './services/firestore.service';
-// import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, AsyncPipe],
+  imports: [CommonModule, RouterOutlet],
+  // AsyncPipe
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

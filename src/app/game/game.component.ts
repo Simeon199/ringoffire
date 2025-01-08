@@ -9,6 +9,8 @@ import { GameDescriptionComponent } from '../game-description/game-description.c
 import { MatDialogModule } from '@angular/material/dialog';
 import { PlayerComponent } from '../player/player.component';
 import { FirestoreService } from '../services/firestore.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-game',
@@ -28,21 +30,42 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: any = '';
   game!: Game;
+  dialogRef: any;
+  firestore: any;
 
-  constructor(public dialog: MatDialog, private firestoreService: FirestoreService) {
+  constructor(public dialog: MatDialog,
+    private firestoreService: FirestoreService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.newGame();
-    this.firestoreService.getGames().subscribe(games => {
-      console.log("Aktuelle Spiele: ", games);
+    this.route.params.subscribe((params) => {
+      console.log('parameters: ', params['id']);
+      this.firestoreService.getGames().subscribe((games) => {
+        games.forEach((game) => {
+          if (game.id == params['id']) {
+            console.log("Game update: ", game);
+            this.game.currentPlayer = game.currentPlayer;
+            this.game.playedCards = game.playedCards;
+            this.game.players = game.players;
+            this.game.stack = game.stack;
+          }
+        });
+      });
     });
   }
 
   newGame() {
     this.game = new Game();
-    this.firestoreService.addGame(this.game.toJson()); // this.game
-    // console.log(this.game);
+    // this.firestoreService.addGame(this.game.toJson()); 
+  }
+
+  updateGameFromFirestore(game: any): void {
+    this.game.currentPlayer = game.currentPlayer;
+    this.game.playedCards = game.playedCards;
+    this.game.players = game.players;
+    this.game.stack = game.stack;
   }
 
   takeCard() {

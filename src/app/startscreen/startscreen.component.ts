@@ -19,8 +19,6 @@ export class StartscreenComponent implements OnInit {
     try {
       const docRef = await addDoc(collection(this.firestore, 'games'), game.toJson());
       await this.router.navigateByUrl(`/game/${docRef.id}`);
-      // addDoc(collection(this.firestore, 'games'), game.toJson);
-      // this.router.navigateByUrl('/game');
     }
     catch (err) {
       console.error('Fehler beim Hinzufügen des Spiels: ', err);

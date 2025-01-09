@@ -65,19 +65,25 @@ export class GameComponent implements OnInit {
   }
 
   updateGameFromFirestore(game: any): void {
-    this.game.currentPlayer = game.currentPlayer;
-    this.game.playedCards = game.playedCards;
-    this.game.players = game.players;
+    this.game.players = game.currentPlayer;
     this.game.stack = game.stack;
+    this.game.playedCards = game.playedCards;
+    this.game.currentPlayer = game.players;
+    this.game.pickCardAnimation = game.stack;
+    this.game.currentCard = game.pickCardAnimation;
+    // this.game.currentPlayer = game.currentPlayer;
+    // this.game.playedCards = game.playedCards;
+    // this.game.players = game.players;
+    // this.game.stack = game.stack;
   }
 
   takeCard() {
     if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
-      this.saveGame();
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
         this.saveGame();

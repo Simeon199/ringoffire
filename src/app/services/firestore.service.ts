@@ -14,21 +14,15 @@ export class FirestoreService {
     getGames(): Observable<any[]> {
         let gamesCollection = this.getGamesRef();
         return collectionData(gamesCollection, { idField: 'id' });
-        // return collectionData(gamesCollection);
-    }
-
-    invokeFirestore(arg: any) {
-        arg = this.firestore;
     }
 
     getGamesRef() {
         return collection(this.firestore, 'games');
     }
 
-    // getGameById(gameId: string): Observable<any> {
-    //     const gameDocRef = doc(this.firestore, `game/${gameId}`);
-    //     return docData(gameDocRef);
-    // }
+    getSingleDocRef(colId: string, docId: string) {
+        return doc(collection(this.firestore, colId), docId);
+    }
 
     async addGame(newGame: GameData) {
         const gamesCollection = collection(this.firestore, 'games');

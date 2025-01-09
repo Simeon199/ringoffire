@@ -8,8 +8,10 @@ import { Game } from '../../../src/models/game';
 import { GameDescriptionComponent } from '../game-description/game-description.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PlayerComponent } from '../player/player.component';
-import { FirestoreService } from '../services/firestore.service';
+// import { FirestoreService } from '../services/firestore.service';
+import { Firestore, collection, collectionData, doc, addDoc, docData } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,32 +29,31 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class GameComponent implements OnInit {
+  gameData$: Observable<any> | undefined;
   pickCardAnimation = false;
   currentCard: any = '';
   game!: Game;
-  dialogRef: any;
-  firestore: any;
 
   constructor(public dialog: MatDialog,
-    private firestoreService: FirestoreService,
-    private route: ActivatedRoute) {
-  }
+    private firestore: Firestore,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((params) => {
       console.log('parameters: ', params['id']);
-      this.firestoreService.getGames().subscribe((games) => {
-        games.forEach((game) => {
-          if (game.id == params['id']) {
-            console.log("Game update: ", game);
-            this.game.currentPlayer = game.currentPlayer;
-            this.game.playedCards = game.playedCards;
-            this.game.players = game.players;
-            this.game.stack = game.stack;
-          }
+      const gameId = params['id'];
+      if (gameId) {
+        const gameDocRef = doc(this.firestore, `games/${gameId}`);
+        this.gameData$ = docData(gameDocRef);
+        this.gameData$.subscribe((game) => {
+          console.log('Game update: ', game);
+          this.game.currentPlayer = game.currentPlayer;
+          this.game.playedCards = game.playedCards;
+          this.game.players = game.players;
+          this.game.stack = game.stack;
         });
-      });
+      }
     });
   }
 
@@ -72,7 +73,6 @@ export class GameComponent implements OnInit {
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop();
       this.pickCardAnimation = true;
-
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       setTimeout(() => {

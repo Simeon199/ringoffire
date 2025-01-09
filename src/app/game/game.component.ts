@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { AppComponent } from '../app.component';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,8 +7,7 @@ import { Game } from '../../../src/models/game';
 import { GameDescriptionComponent } from '../game-description/game-description.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PlayerComponent } from '../player/player.component';
-// import { FirestoreService } from '../services/firestore.service';
-import { Firestore, collection, collectionData, doc, addDoc, docData } from '@angular/fire/firestore';
+import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -59,7 +57,6 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-    // this.firestoreService.addGame(this.game.toJson()); 
   }
 
   updateGameFromFirestore(game: any): void {

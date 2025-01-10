@@ -5,11 +5,19 @@ import { MatDialogContent } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-dialog-add-player',
   standalone: true,
-  imports: [MatDialogContent, MatFormFieldModule, MatDialogModule, FormsModule, MatInputModule],
+  imports: [
+    MatDialogContent,
+    MatFormFieldModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './dialog-add-player.component.html',
   styleUrls: ['./dialog-add-player.component.scss']
 })

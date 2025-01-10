@@ -16,7 +16,6 @@ export class StartscreenComponent implements OnInit {
 
   async newGame() {
     let game = new Game();
-    // debugger;
     try {
       const docRef = await addDoc(collection(this.firestore, 'games'), game.toJson());
       await this.router.navigateByUrl(`/game/${docRef.id}`);

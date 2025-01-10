@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData, doc, addDoc, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-// import { GameComponent } from '../game/game.component';
-// import { GameData } from '../../models/game';
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +21,4 @@ export class FirestoreService {
     getSingleDocRef(colId: string, docId: string) {
         return doc(collection(this.firestore, colId), docId);
     }
-
-    // async addGame(newGame: GameData) {
-    //     const gamesCollection = collection(this.firestore, 'games');
-    //     await addDoc(gamesCollection, newGame);
-    // }
 }

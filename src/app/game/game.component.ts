@@ -11,8 +11,6 @@ import { Firestore, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-game',
   standalone: true,
@@ -31,8 +29,6 @@ export class GameComponent implements OnInit {
   gameData$: Observable<any> | undefined;
   game!: Game;
   gameId: string | undefined;
-  // pickCardAnimation = false;
-  // currentCard: any = '';
 
   constructor(public dialog: MatDialog,
     private firestore: Firestore,
@@ -42,19 +38,18 @@ export class GameComponent implements OnInit {
     this.newGame();
     this.route.params.subscribe((params) => {
       console.log('parameters: ', params['id']);
-      // const gameId = params['id'];
       this.gameId = params['id'];
       if (this.gameId) {
         const gameDocRef = doc(this.firestore, `games/${this.gameId}`);
         this.gameData$ = docData(gameDocRef);
         this.gameData$.subscribe((game) => {
-          // console.log('Game update: ', game);
-          this.game.players = game.currentPlayer;
-          this.game.stack = game.stack;
-          this.game.playedCards = game.playedCards;
-          this.game.currentPlayer = game.players;
-          this.game.pickCardAnimation = game.stack;
-          this.game.currentCard = game.pickCardAnimation;
+          console.log('Game update: ', game);
+          this.game.players = game.players,
+            this.game.stack = game.stack,
+            this.game.playedCards = game.playedCards,
+            this.game.currentPlayer = game.currentPlayer,
+            this.game.pickCardAnimation = game.pickCardAnimation,
+            this.game.currentCard = game.currentCard
         });
       }
     });
@@ -62,19 +57,6 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-  }
-
-  updateGameFromFirestore(game: any): void {
-    this.game.players = game.currentPlayer;
-    this.game.stack = game.stack;
-    this.game.playedCards = game.playedCards;
-    this.game.currentPlayer = game.players;
-    this.game.pickCardAnimation = game.stack;
-    this.game.currentCard = game.pickCardAnimation;
-    // this.game.currentPlayer = game.currentPlayer;
-    // this.game.playedCards = game.playedCards;
-    // this.game.players = game.players;
-    // this.game.stack = game.stack;
   }
 
   takeCard() {
@@ -86,8 +68,8 @@ export class GameComponent implements OnInit {
       this.saveGame();
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
-        this.saveGame();
         this.game.pickCardAnimation = false;
+        this.saveGame();
       }, 1000)
     }
   }

@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +35,6 @@ export const appConfig: ApplicationConfig = {
       MatDialogModule,
       MatInputModule,
       MatCardModule
-    )
+    ), provideAnimationsAsync()
   ]
 };

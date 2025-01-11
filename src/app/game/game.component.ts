@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -84,8 +84,12 @@ export class GameComponent implements OnInit {
         console.error('Error saving game: ', error);
       });
   }
+  @ViewChild('addButton') addButton!: ElementRef<HTMLButtonElement>;
 
   openDialog(): void {
+    if (this.addButton) {
+      this.addButton.nativeElement.blur();
+    }
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
